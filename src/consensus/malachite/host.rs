@@ -191,7 +191,9 @@ impl Host {
                         hex::encode(certificate.value_id.hash),
                         certificate.height
                     );
-                    let validator_set = state.shard_validator.get_validator_set();
+                    let validator_set = state
+                        .shard_validator
+                        .get_validator_set(certificate.height.as_u64());
                     consensus_ref
                         .cast(ConsensusMsg::StartHeight(certificate.height, validator_set))?;
                     return Ok(());
